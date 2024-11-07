@@ -1,0 +1,3 @@
+from django.http import Httpresponse
+def index(reqwest):
+    return Httpresponse('Главная')
