@@ -1,15 +1,35 @@
 from django.http import HttpResponse
-def index(reqwest):
+
+cities_info = {'paris': {'fact': 'Paris saint germain is 25-th team in champions ligue in current season ',
+                         1924: '1924 Summer Olympics'
+                         },
+               'marselle': {'fact': 'fastest taxi',
+               1956: 'Honoré de Marseille'}
+               }
+
+
+def index(request):
     res = '''<a href=/history>История</a><br>
-    <a href=/cities>Города</a><br>
-    <a href=/facts>Факты</a>'''
+    <a href=/cities>Города</a>'''
     return HttpResponse(res)
 
-def history(reqwest):
+
+def history(request):
     return HttpResponse('История')
 
-def cities(reqwest):
-    return HttpResponse('Город')
 
-def facts(reqwest):
+def cities(request):
+    if request.GET:
+        city = request.GET.get('city')
+        year = int(request.GET.get('year'))
+        return HttpResponse(cities_info[city][year])
+    else:
+        return HttpResponse('Города')
+
+
+def cities_about(request, city_name):
+    return HttpResponse(cities_info[city_name]['fact'])
+
+
+def facts(request):
     return HttpResponse('Факты')

@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.index),
     path('history/', views.history),
     path('cities/', views.cities),
+    path('cities/<str:city_name>', views.cities_about),
     path('facts/', views.facts),
 
 ]
